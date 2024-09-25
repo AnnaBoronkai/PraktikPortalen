@@ -35,3 +35,38 @@ out/
 
 ### VS Code ###
 .vscode/
+.android/
+.cache/
+.docker/
+.dotnet/
+.eclipse/
+.jdks/
+.m2/
+.p2/
+.viminfo
+.bash_history
+AppData/
+Contacts/
+Downloads/
+NTUSER.DAT*
+ntuser.dat*
+.gitconfig
+OneDrive/
+Videos/
+
+# Ignorera orelaterade systemfiler
+.android/
+.cache/
+.docker/
+.dotnet/
+.eclipse/
+.jdks/
+.m2/
+.p2/
+.viminfo
+.bash_history
+AppData/
+Downloads/
+NTUSER.DAT*
+
+
