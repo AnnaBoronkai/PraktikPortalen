@@ -6,7 +6,7 @@
 
 body {
     font-family: 'Arial', sans-serif;
-    background-color: #f4f4f4;
+    background-color: #f0f8ff;
     color: #333;
     line-height: 1.6;
     padding: 20px;
@@ -25,7 +25,7 @@ body {
 h1 {
     font-size: 3em;
     margin-bottom: 20px;
-    color: #005700; /* Mörkgrön */
+    color: #4682b4;
 }
 
 p {
@@ -39,7 +39,7 @@ p {
     padding: 10px 20px;
     font-size: 1.1em;
     color: white;
-    background-color: #005700; /* Mörkgrön */
+    background-color: #4682b4;
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -47,13 +47,13 @@ p {
 }
 
 .button:hover {
-    background-color: #003800; /* Mörkare grön vid hover */
+    background-color: #5a9fd6;
 }
 
 .info-section {
     margin-top: 50px;
     padding: 20px;
-    background-color: #005700; /* Mörkgrön */
+    background-color: #87cefa;
     color: white;
     border-radius: 10px;
 }
@@ -66,5 +66,5 @@ p {
 
 .info-section p {
     font-size: 1.2em;
-    color: #f4f4f4; /* Ljusare textfärg */
+    color: #f0f8ff;
 }
