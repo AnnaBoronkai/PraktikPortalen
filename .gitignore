@@ -54,19 +54,7 @@ ntuser.dat*
 OneDrive/
 Videos/
 
-# Ignorera orelaterade systemfiler
-.android/
-.cache/
-.docker/
-.dotnet/
-.eclipse/
-.jdks/
-.m2/
-.p2/
-.viminfo
-.bash_history
-AppData/
-Downloads/
-NTUSER.DAT*
+
+
 
 
