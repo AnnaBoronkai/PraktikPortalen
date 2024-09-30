@@ -35,6 +35,7 @@ public class UserController {
     @PutMapping("/{id}/role")
     public User updateUserRole(@PathVariable Long id, @RequestParam Role role) {
         return userService.updateUserRole(id, role);
+    }
 
 
 
