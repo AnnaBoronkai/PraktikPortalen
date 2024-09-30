@@ -1,13 +1,15 @@
 package com.example.devops.controller;
 
 import com.example.devops.Enum.Role;
-import com.example.devops.UserService;
+import com.example.devops.Service.Interface.UserService;
 import com.example.devops.model.User;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
+@Controller
 @RequestMapping("/users")
 public class UserController {
 
@@ -45,6 +47,13 @@ public class UserController {
     @PutMapping("/{id}/role")
     public User updateUserRole(@PathVariable Long id, @RequestParam Role role) {
         return userService.updateUserRole(id, role);
+    }
+
+    @GetMapping("/view")
+    public String viewAllUsers(Model model) {
+        List<User> users = userService.getAllUsers();
+        model.addAttribute("users", users);
+        return "users";
     }
 
 

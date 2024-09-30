@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>All students</title>
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+</head>
+<body>
+<h1>Alla studenter</h1>
+
+<div class="student-list">
+
+    <div th:each="user : ${users}">
+        <form class="student-form">
+            <div class="student-details">
+                <span class="student-name" th:text="${user.username}"></span>
+                <span class="student-role" th:text="${user.role}" style="float: right;"></span>
+            </div>
+            <div class="student-actions">
+
+                <button type="button" class="btn btn-view" th:onclick="'window.location.href=\'/users/' + ${user.id} + '/view\' '">
+                    Granska
+                </button>
+
+                <button type="submit" class="btn btn-delete" th:formaction="'/users/' + ${user.id} + '/delete'">
+                    Ta bort
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>
