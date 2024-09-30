@@ -37,6 +37,11 @@ public class UserController {
         return userService.createUser(user);
     }
 
+    @DeleteMapping("/{id}")
+    public void deleteUser(@PathVariable Long id){
+        userService.deleteUser(id);
+    }
+
     @PutMapping("/{id}/role")
     public User updateUserRole(@PathVariable Long id, @RequestParam Role role) {
         return userService.updateUserRole(id, role);
