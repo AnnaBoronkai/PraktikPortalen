@@ -1,5 +1,6 @@
 package com.example.devops.model;
 
+import com.example.devops.Enum.Role;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -19,6 +20,7 @@ public class User {
     private String username;
 
     @Column(nullable = false)
-    private String role;
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
 }
