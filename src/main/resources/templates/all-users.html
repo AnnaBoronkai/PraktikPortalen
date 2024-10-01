@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="sv" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>All students</title>
@@ -18,11 +18,11 @@
             </div>
             <div class="student-actions">
 
-                <button type="button" class="btn btn-view" th:onclick="'window.location.href=\'/users/' + ${user.id} + '/view\' '">
+                <button type="submit" class="btn btn-view" formaction="/users/view">
                     Granska
                 </button>
 
-                <button type="submit" class="btn btn-delete" th:formaction="'/users/' + ${user.id} + '/delete'">
+                <button type="submit" class="btn btn-delete" formaction="/users/delete">
                     Ta bort
                 </button>
             </div>

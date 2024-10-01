@@ -1,20 +1,21 @@
 package com.example.devops.Service.Interface;
 
+import com.example.devops.DTO.UserDTO;
 import com.example.devops.Enum.Role;
 import com.example.devops.model.User;
 
 import java.util.List;
+import java.util.UUID;
 
 public interface UserService {
 
+    List<UserDTO> getAllUsersDTO();
 
-    List<User> getAllUsers();
+    UserDTO getUserDTOById(UUID id);
 
-    User getUserById(Long id);
+    User createAndSaveUser(String username);
 
-    User createUser(User user);
+    void deleteUser(UUID id);
 
-    void deleteUser(Long id);
-
-    User updateUserRole(Long userId, Role newRole);
+    UserDTO updateUserRole(UUID id, Role newRole);
 }

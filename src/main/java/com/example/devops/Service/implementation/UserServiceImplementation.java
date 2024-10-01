@@ -7,6 +7,8 @@ import com.example.devops.model.User;
 import com.example.devops.repository.UserRepository;
 import org.springframework.stereotype.Service;
 import java.util.List;
+import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImplementation implements UserService {
@@ -17,39 +19,56 @@ public class UserServiceImplementation implements UserService {
         this.userRepository = userRepository;
     }
 
+
     @Override
-    public List<User> getAllUsers() {
-        return userRepository.findAll();
+    public List<UserDTO> getAllUsersDTO() {
+        return userRepository.findAll().stream()
+                .map(this::userToDTO)
+                .collect(Collectors.toList());
     }
 
     @Override
-    public User getUserById(Long id) {
-        return userRepository.findById(id)
+    public UserDTO getUserDTOById(UUID id) {
+        return userRepository.findById(id).map(this::userToDTO)
                 .orElseThrow(() -> new RuntimeException("User not found with ID: " + id));
     }
 
     @Override
-    public User createUser(User user) {
+    public User createAndSaveUser(String username) {
+        User user = new User();
+        user.setId(UUID.randomUUID());
+        user.setUsername(username);
+        user.setRole(Role.STUDENT);
         return userRepository.save(user);
     }
 
     @Override
-    public void deleteUser(Long id) {
+    public void deleteUser(UUID id) {
         userRepository.deleteById(id);
     }
 
     @Override
-    public User updateUserRole(Long userId, Role newRole) {
-        User user = userRepository.findById(userId)
+    public UserDTO updateUserRole(UUID id, Role newRole) {
+        User user = userRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("User not found"));
         user.setRole(newRole);
-        return userRepository.save(user);
+        User updatedUser = userRepository.save(user);
+        return userToDTO(updatedUser);
     }
 
-    public UserDTO userToUserDTO(User user){
+    public UserDTO userToDTO(User user){
         return UserDTO.builder()
+                .id(user.getId())
                 .username(user.getUsername())
                 .role(user.getRole())
+                .build();
+    }
+
+    public User DTOToUser(UserDTO userDTO){
+        return User.builder()
+                .id(userDTO.getId())
+                .username(userDTO.getUsername())
+                .role(userDTO.getRole())
                 .build();
     }
 
