@@ -1,12 +1,25 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="sv" xmlns:th="http://www.thymeleaf.org">
 <head>
+    <meta charset="UTF-8">
     <title>User Details</title>
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
 </head>
 <body>
-<h1>User Information</h1>
-<p>Username: <span th:text="${user.username}"></span></p>
 
-<a th:href="@{/users}">Back to users list</a>
+<h1>Student</h1>
+
+<div class="student-list">
+    <div class="student-form">
+        <div class="student-details">
+            <p><strong>Namn:</strong> <span th:text="${user.username}"></span></p>
+        </div>
+    </div>
+
+    <div class="student-actions">
+        <a class="btn btn-back" th:href="@{/users}">Alla studenter</a>
+    </div>
+</div>
+
 </body>
 </html>

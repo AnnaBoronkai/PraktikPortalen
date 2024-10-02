@@ -1,4 +1,4 @@
-/* style.css */
+
 body {
     font-family: Arial, sans-serif;
     background-color: #f9f9f9;
@@ -75,4 +75,13 @@ h1 {
 
 .btn-delete:hover {
     background-color: #e53935;
+}
+
+.btn-back {
+    background-color: #007BFF;
+    color: white;
+}
+
+.btn-back:hover {
+    background-color: #0069d9;
 }
