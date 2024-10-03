@@ -10,6 +10,6 @@
         <module name="DevOps.main" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel target="21" />
+    <bytecodeTargetLevel target="20" />
   </component>
 </project>

@@ -9,13 +9,19 @@ import java.util.UUID;
 
 public interface UserService {
 
+    UserDTO userToDTO(User user);
+
+    User DTOToUser(UserDTO userDTO);
+
     List<UserDTO> getAllUsersDTO();
 
     UserDTO getUserDTOById(UUID id);
 
-    User createAndSaveUser(String username);
+    void createAndSaveUser(String username);
 
     void deleteUser(UUID id);
 
-    UserDTO updateUserRole(UUID id, Role newRole);
+    void setUserRole(UUID id);
+
+
 }

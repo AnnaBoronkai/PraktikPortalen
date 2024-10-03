@@ -1,17 +1,29 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="sv" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Create New User</title>
+    <meta charset="UTF-8">
+    <title>Lägg till Användare</title>
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
 </head>
 <body>
-<h1></h1>
 
-<form action="#" th:action="@{/users/create}" method="post">
-    <label for="username">Username:</label>
-    <input type="text" id="username" name="username" required />
-    <button type="submit">Create User</button>
-</form>
+<div th:replace="fragments/header :: header(isIndexPage=true)"></div>
 
-<a th:href="@{/users}">Back to user list</a>
+<h2>Lägg till användare</h2>
+
+<div class="user-form">
+    <form th:action="@{/users/create}" method="post">
+        <div class="form-container">
+            <label for="username"><strong>Namn:</strong></label>
+            <input type="text" id="username" name="username" required />
+            <button type="submit" class="btn btn-primary">OK</button>
+        </div>
+    </form>
+    <div class="back-to-users">
+        <a class="btn btn-primary" th:href="@{/users}">Alla användare</a>
+    </div>
+</div>
+<div th:replace="fragments/footer :: footer"></div>
+
 </body>
 </html>

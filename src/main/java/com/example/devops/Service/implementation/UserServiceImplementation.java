@@ -5,6 +5,7 @@ import com.example.devops.Enum.Role;
 import com.example.devops.Service.Interface.UserService;
 import com.example.devops.model.User;
 import com.example.devops.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.UUID;
@@ -13,12 +14,27 @@ import java.util.stream.Collectors;
 @Service
 public class UserServiceImplementation implements UserService {
 
-    private final UserRepository userRepository;
+    @Autowired
+    private UserRepository userRepository;
 
-    public UserServiceImplementation(UserRepository userRepository) {
-        this.userRepository = userRepository;
+
+    @Override
+    public UserDTO userToDTO(User user){
+        return UserDTO.builder()
+                .id(user.getId())
+                .username(user.getUsername())
+                .role(user.getRole())
+                .build();
     }
 
+    @Override
+    public User DTOToUser(UserDTO userDTO){
+        return User.builder()
+                .id(userDTO.getId())
+                .username(userDTO.getUsername())
+                .role(userDTO.getRole())
+                .build();
+    }
 
     @Override
     public List<UserDTO> getAllUsersDTO() {
@@ -34,12 +50,12 @@ public class UserServiceImplementation implements UserService {
     }
 
     @Override
-    public User createAndSaveUser(String username) {
+    public void createAndSaveUser(String username) {
         User user = new User();
         user.setId(UUID.randomUUID());
         user.setUsername(username);
         user.setRole(Role.STUDENT);
-        return userRepository.save(user);
+        userRepository.save(user);
     }
 
     @Override
@@ -48,32 +64,17 @@ public class UserServiceImplementation implements UserService {
     }
 
     @Override
-    public UserDTO updateUserRole(UUID id, Role newRole) {
-        User user = userRepository.findById(id)
+    public void setUserRole(UUID id) {
+        User userToUpdate = userRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("User not found"));
-        user.setRole(newRole);
-        User updatedUser = userRepository.save(user);
-        return userToDTO(updatedUser);
+        if (userToUpdate.getRole() == Role.STUDENT){
+            userToUpdate.setRole(Role.ADMIN);
+        }
+        else {
+            userToUpdate.setRole(Role.STUDENT);
+        }
+        userRepository.save(userToUpdate);
     }
-
-    public UserDTO userToDTO(User user){
-        return UserDTO.builder()
-                .id(user.getId())
-                .username(user.getUsername())
-                .role(user.getRole())
-                .build();
-    }
-
-    public User DTOToUser(UserDTO userDTO){
-        return User.builder()
-                .id(userDTO.getId())
-                .username(userDTO.getUsername())
-                .role(userDTO.getRole())
-                .build();
-    }
-
-
-
 
 
 

@@ -18,12 +18,6 @@ public class UserController {
     @Autowired
     UserService userService;
 
-//    private final UserService userService;
-//
-//    public UserController(UserService userService) {
-//        this.userService = userService;
-//    }
-
 
     @GetMapping
     public String getAllUsers(Model model) {
@@ -38,7 +32,6 @@ public class UserController {
         model.addAttribute("user", user);
         return "user";
     }
-
 
     @PostMapping("/create")
     public String createUser(@RequestParam String username) {
@@ -59,15 +52,10 @@ public class UserController {
     }
 
     @PostMapping("/{id}/role")
-    public String updateUserRole(@PathVariable UUID id, @RequestParam Role role) {
-        userService.updateUserRole(id, role);
+    public String updateUserRole(@PathVariable UUID id) {
+        userService.setUserRole(id);
         return "redirect:/users";
     }
-
-
-
-
-
 
 
 }
