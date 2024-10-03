@@ -1,21 +1,29 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="sv" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Välkommen</title>
+    <title>PraktikPortalen - Välkommen</title>
     <link rel="stylesheet" th:href="@{/css/styles.css}">
 </head>
 <body>
+
+<div th:replace="fragments/header :: header(isIndexPage=true)"></div>
+
 <div class="container">
-    <h1>Välkommen!</h1>
-    <p>Detta är en enkel webbsida som är en del av mitt DevOps-projekt.</p>
-    <a href="#more-info" class="button">Läs mer</a>
+    <section class="welcome-section">
+        <h2>Välkommen till PraktikPortalen!</h2>
+        <p>Hitta praktikplatser och registrera ansökningar enkelt via vår plattform.</p>
+
+        <a th:href="@{/users}" class="button">Visa alla användare</a>
+    </section>
 </div>
 
 <div id="more-info" class="info-section">
-    <h2>Mer information</h2>
-    <p>Mer info. Mer info. Mer info.</p>
+    <p>På PraktikPortalen kan du som student hålla koll på dina ansökningar.</p>
 </div>
+
+<div th:replace="fragments/footer :: footer"></div>
+
 </body>
 </html>

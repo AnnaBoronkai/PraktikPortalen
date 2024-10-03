@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="sv" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>User Details</title>
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
+</head>
+<body>
+
+<div th:replace="fragments/header :: header(isIndexPage=true)"></div>
+
+<h1>Student</h1>
+
+<div class="student-list">
+    <div class="student-form">
+        <div class="student-details">
+            <p><strong>Namn:</strong> <span th:text="${user.username}"></span></p>
+            <p><span th:text="${user.role}"></span></p>
+        </div>
+    </div>
+
+    <div class="student-actions">
+        <a class="btn btn-primary" th:href="@{/users}">Alla användare</a>
+        <form th:action="@{'/users/{id}/role'(id=${user.id})}" method="post" style="display: inline;">
+            <button type="submit" class="btn btn-primary" style="float: right;">Uppdatera roll</button>
+        </form>
+    </div>
+
+<div th:replace="fragments/footer :: footer"></div>
+
+</body>
+</html>
