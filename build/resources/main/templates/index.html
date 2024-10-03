@@ -7,32 +7,23 @@
     <link rel="stylesheet" th:href="@{/css/styles.css}">
 </head>
 <body>
-<header>
-    <div class="header-content">
-        <h1>PraktikPortalen</h1>
-        <nav>
-            <ul>
-                <li><a th:href="@{/users}">Visa alla studenter</a></li>
-            </ul>
-        </nav>
-    </div>
-</header>
+
+<div th:replace="fragments/header :: header(isIndexPage=true)"></div>
 
 <div class="container">
     <section class="welcome-section">
         <h2>Välkommen till PraktikPortalen!</h2>
         <p>Hitta praktikplatser och registrera ansökningar enkelt via vår plattform.</p>
-        <a href="#more-info" class="button">Läs mer</a>
+
+        <a th:href="@{/users}" class="button">Visa alla användare</a>
     </section>
 </div>
 
 <div id="more-info" class="info-section">
-    <h2>Mer information</h2>
-    <p>På PraktikPortalen kan du som student hålla koll dina ansökningar.</p>
+    <p>På PraktikPortalen kan du som student hålla koll på dina ansökningar.</p>
 </div>
 
-<footer>
-    <p>© 2024 PraktikPortalen. Alla rättigheter förbehållna.</p>
-</footer>
+<div th:replace="fragments/footer :: footer"></div>
+
 </body>
 </html>
