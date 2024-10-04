@@ -2,8 +2,10 @@ package com.example.devops.controllers;
 
 import com.example.devops.models.dtos.UserDTO;
 import com.example.devops.services.interfaces.UserService;
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.UUID;
@@ -35,11 +37,16 @@ public class UserController {
         return "user";
     }
 
+
     @PostMapping("/create")
-    public String createUser(@RequestParam String username) {
-        userService.createAndSaveUser(username);
+    public String createUser(@Valid @ModelAttribute("user") UserDTO userDTO, BindingResult result) {
+        if (result.hasErrors()) {
+            return "create-user";
+        }
+        userService.createAndSaveUser(userDTO.getUsername());
         return "redirect:/users";
     }
+
 
     @GetMapping("/new")
     public String showCreateUserForm(Model model){

@@ -12,10 +12,16 @@
 <h2>Lägg till användare</h2>
 
 <div class="user-form">
-    <form th:action="@{/users/create}" method="post">
+    <form th:action="@{/users/create}" th:object="${user}" method="post">
         <div class="form-container">
+
             <label for="username"><strong>Namn:</strong></label>
-            <input type="text" id="username" name="username" required />
+            <input type="text" id="username" name="username" th:field="*{username}" required/>
+
+            <div class="validation-error">
+                <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span>
+            </div>
+
             <button type="submit" class="btn btn-primary">OK</button>
         </div>
     </form>
@@ -23,6 +29,7 @@
         <a class="btn btn-primary" th:href="@{/users}">Alla användare</a>
     </div>
 </div>
+
 <div th:replace="fragments/footer :: footer"></div>
 
 </body>
