@@ -1,11 +1,9 @@
-package com.example.devops.model;
+package com.example.devops.models.entities;
 
-import com.example.devops.Enum.Role;
+import com.example.devops.enums.Role;
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.UuidGenerator;
-
 import java.util.UUID;
 
 @Entity

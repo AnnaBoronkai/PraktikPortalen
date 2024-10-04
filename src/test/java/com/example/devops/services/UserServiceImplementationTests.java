@@ -1,10 +1,10 @@
-package com.example.devops.service;
+package com.example.devops.services;
 
-import com.example.devops.DTO.UserDTO;
-import com.example.devops.Enum.Role;
-import com.example.devops.Service.Interface.UserService;
-import com.example.devops.model.User;
-import com.example.devops.repository.UserRepository;
+import com.example.devops.models.dtos.UserDTO;
+import com.example.devops.enums.Role;
+import com.example.devops.services.interfaces.UserService;
+import com.example.devops.models.entities.User;
+import com.example.devops.repositories.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.UUID;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 
@@ -28,10 +29,13 @@ public class UserServiceImplementationTests {
     @Test
     @Transactional
     public void testCreateAndSaveUser() {
-        String username = "testuser";
+        String username = "Andy Almighty";
         userService.createAndSaveUser(username);
 
-        User savedUser = userRepository.findByUsername(username)
+        List<User> users = userRepository.findAll();
+        User savedUser = users.stream()
+                .filter(user -> user.getUsername().equals(username))
+                .findFirst()
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
         assertThat(savedUser).isNotNull();
@@ -43,7 +47,7 @@ public class UserServiceImplementationTests {
     @Test
     @Transactional
     public void testUpdateUserRole(){
-        String username = "testuser";
+        String username = "Beebe Bright";
         Role student = Role.STUDENT;
         Role admin = Role.ADMIN;
         User user = new User();
@@ -71,20 +75,20 @@ public class UserServiceImplementationTests {
     @Transactional
     public void testGetAllUsersDTO() {
         User user1 = new User();
-        user1.setUsername("testuser1");
+        user1.setUsername("Charles Checker");
         user1.setRole(Role.STUDENT);
         userRepository.save(user1);
 
         User user2 = new User();
-        user2.setUsername("testuser2");
+        user2.setUsername("Daniel Dandy");
         user2.setRole(Role.ADMIN);
         userRepository.save(user2);
 
         List<UserDTO> userDTOList = userService.getAllUsersDTO();
 
         assertThat(userDTOList).hasSize(2);
-        assertThat(userDTOList.get(0).getUsername()).isEqualTo("testuser1");
-        assertThat(userDTOList.get(1).getUsername()).isEqualTo("testuser2");
+        assertThat(userDTOList.get(0).getUsername()).isEqualTo("Charles Checker");
+        assertThat(userDTOList.get(1).getUsername()).isEqualTo("Daniel Dandy");
         assertThat(userDTOList.get(0).getRole()).isEqualTo(Role.STUDENT);
         assertThat(userDTOList.get(1).getRole()).isEqualTo(Role.ADMIN);
     }
@@ -94,14 +98,14 @@ public class UserServiceImplementationTests {
     @Transactional
     public void testGetUserDTOById() {
         User user = new User();
-        user.setUsername("testuser");
+        user.setUsername("Evelyn Ennis");
         user.setRole(Role.STUDENT);
         userRepository.save(user);
 
         UserDTO userDTO = userService.getUserDTOById(user.getId());
 
         assertThat(userDTO).isNotNull();
-        assertThat(userDTO.getUsername()).isEqualTo("testuser");
+        assertThat(userDTO.getUsername()).isEqualTo("Evelyn Ennis");
         assertThat(userDTO.getRole()).isEqualTo(Role.STUDENT);
     }
 
@@ -111,17 +115,21 @@ public class UserServiceImplementationTests {
     public void testGetUserDTOById_NotFound() {
         UUID nonExistingId = UUID.randomUUID();
 
-        assertThrows(RuntimeException.class, () -> {
-            userService.getUserDTOById(nonExistingId);
-        }, "User not found with ID: " + nonExistingId);
+        RuntimeException exception = assertThrows(
+                RuntimeException.class,
+                () -> userService.getUserDTOById(nonExistingId)
+        );
+
+        assertEquals("User not found with ID: " + nonExistingId, exception.getMessage());
     }
+
 
 
     @Test
     @Transactional
     public void testDeleteUser(){
         User user = new User();
-        user.setUsername("testuser");
+        user.setUsername("Freddie Ferrari");
         user.setRole(Role.STUDENT);
         userRepository.save(user);
 
@@ -139,7 +147,7 @@ public class UserServiceImplementationTests {
         UUID id = UUID.randomUUID();
         User user = User.builder()
                 .id(id)
-                .username("testuser")
+                .username("Gabby Glorious")
                 .role(Role.STUDENT)
                 .build();
 
@@ -158,7 +166,7 @@ public class UserServiceImplementationTests {
         UUID id = UUID.randomUUID();
         UserDTO userDTO = UserDTO.builder()
                 .id(id)
-                .username("testuser")
+                .username("Igor Ignatius")
                 .role(Role.STUDENT)
                 .build();
 

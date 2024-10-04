@@ -1,11 +1,10 @@
-package com.example.devops.Service.implementation;
+package com.example.devops.services.implementations;
 
-import com.example.devops.DTO.UserDTO;
-import com.example.devops.Enum.Role;
-import com.example.devops.Service.Interface.UserService;
-import com.example.devops.model.User;
-import com.example.devops.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.devops.models.dtos.UserDTO;
+import com.example.devops.enums.Role;
+import com.example.devops.services.interfaces.UserService;
+import com.example.devops.models.entities.User;
+import com.example.devops.repositories.UserRepository;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.UUID;
@@ -14,8 +13,11 @@ import java.util.stream.Collectors;
 @Service
 public class UserServiceImplementation implements UserService {
 
-    @Autowired
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
+
+    public UserServiceImplementation(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
 
     @Override

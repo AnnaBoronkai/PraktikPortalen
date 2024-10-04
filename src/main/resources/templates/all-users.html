@@ -16,18 +16,21 @@
     </div>
 </div>
 
-<div class="student-list">
-    <div th:each="user : ${users}">
-        <form class="student-form">
-            <div class="student-details">
-                <span class="student-name" th:text="${user.username}"></span>
-                <span class="student-role" th:text="${user.role}" style="float: right;"></span>
-            </div>
-            <div class="student-actions">
-                <button type="submit" class="btn btn-view" th:formaction="@{/users/{id}(id=${user.id})}">Granska</button>
-                <button type="submit" class="btn btn-delete" th:formaction="@{/users/delete/{id}(id=${user.id})}">Ta bort</button>
-            </div>
-        </form>
+<div class="student-list-container">
+    <div class="student-list">
+        <div th:each="user : ${users}">
+            <form class="student-form">
+                <div class="student-details">
+                    <span class="student-name" th:text="${user.username}"></span>
+                    <span class="student-role" th:text="${user.role}" style="float: right;"></span>
+                </div>
+
+                <div class="student-actions">
+                    <button type="submit" class="btn btn-view" th:formaction="@{/users/{id}(id=${user.id})}">Granska</button>
+                    <button type="submit" class="btn btn-delete" th:formaction="@{/users/delete/{id}(id=${user.id})}">Ta bort</button>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
 

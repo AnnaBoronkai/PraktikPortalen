@@ -1,8 +1,7 @@
-package com.example.devops.DTO;
+package com.example.devops.models.dtos;
 
-import com.example.devops.Enum.Role;
+import com.example.devops.enums.Role;
 import lombok.*;
-
 import java.util.UUID;
 
 @Getter

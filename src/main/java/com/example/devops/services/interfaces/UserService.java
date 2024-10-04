@@ -1,9 +1,7 @@
-package com.example.devops.Service.Interface;
+package com.example.devops.services.interfaces;
 
-import com.example.devops.DTO.UserDTO;
-import com.example.devops.Enum.Role;
-import com.example.devops.model.User;
-
+import com.example.devops.models.dtos.UserDTO;
+import com.example.devops.models.entities.User;
 import java.util.List;
 import java.util.UUID;
 
