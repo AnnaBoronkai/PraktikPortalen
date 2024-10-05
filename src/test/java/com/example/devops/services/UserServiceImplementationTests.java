@@ -46,7 +46,7 @@ public class UserServiceImplementationTests {
 
     @Test
     @Transactional
-    public void testUpdateUserRole(){
+    public void testSetUserRole(){
         String username = "Beebe Bright";
         Role student = Role.STUDENT;
         Role admin = Role.ADMIN;
