@@ -29,17 +29,17 @@ public class UserServiceImplementationTests {
     @Test
     @Transactional
     public void testCreateAndSaveUser() {
-        String username = "Andy Almighty";
-        userService.createAndSaveUser(username);
+        String email = "aa@test.com";
+        userService.createAndSaveUser(email);
 
         List<User> users = userRepository.findAll();
         User savedUser = users.stream()
-                .filter(user -> user.getUsername().equals(username))
+                .filter(user -> user.getEmail().equals(email))
                 .findFirst()
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
         assertThat(savedUser).isNotNull();
-        assertThat(savedUser.getUsername()).isEqualTo(username);
+        assertThat(savedUser.getEmail()).isEqualTo(email);
         assertThat(savedUser.getRole()).isEqualTo(Role.STUDENT);
     }
 
@@ -47,11 +47,11 @@ public class UserServiceImplementationTests {
     @Test
     @Transactional
     public void testSetUserRole(){
-        String username = "Beebe Bright";
+        String email = "bb@test.com";
         Role student = Role.STUDENT;
         Role admin = Role.ADMIN;
         User user = new User();
-        user.setUsername(username);
+        user.setEmail(email);
         user.setRole(student);
         userRepository.save(user);
 
@@ -75,20 +75,20 @@ public class UserServiceImplementationTests {
     @Transactional
     public void testGetAllUsersDTO() {
         User user1 = new User();
-        user1.setUsername("Charles Checker");
+        user1.setEmail("cc@test.com");
         user1.setRole(Role.STUDENT);
         userRepository.save(user1);
 
         User user2 = new User();
-        user2.setUsername("Daniel Dandy");
+        user2.setEmail("dd@test.com");
         user2.setRole(Role.ADMIN);
         userRepository.save(user2);
 
         List<UserDTO> userDTOList = userService.getAllUsersDTO();
 
         assertThat(userDTOList).hasSize(2);
-        assertThat(userDTOList.get(0).getUsername()).isEqualTo("Charles Checker");
-        assertThat(userDTOList.get(1).getUsername()).isEqualTo("Daniel Dandy");
+        assertThat(userDTOList.get(0).getEmail()).isEqualTo("cc@test.com");
+        assertThat(userDTOList.get(1).getEmail()).isEqualTo("dd@test.com");
         assertThat(userDTOList.get(0).getRole()).isEqualTo(Role.STUDENT);
         assertThat(userDTOList.get(1).getRole()).isEqualTo(Role.ADMIN);
     }
@@ -98,14 +98,14 @@ public class UserServiceImplementationTests {
     @Transactional
     public void testGetUserDTOById() {
         User user = new User();
-        user.setUsername("Evelyn Ennis");
+        user.setEmail("ee@test.com");
         user.setRole(Role.STUDENT);
         userRepository.save(user);
 
         UserDTO userDTO = userService.getUserDTOById(user.getId());
 
         assertThat(userDTO).isNotNull();
-        assertThat(userDTO.getUsername()).isEqualTo("Evelyn Ennis");
+        assertThat(userDTO.getEmail()).isEqualTo("ee@test.com");
         assertThat(userDTO.getRole()).isEqualTo(Role.STUDENT);
     }
 
@@ -129,7 +129,7 @@ public class UserServiceImplementationTests {
     @Transactional
     public void testDeleteUser(){
         User user = new User();
-        user.setUsername("Freddie Ferrari");
+        user.setEmail("ff@test.com");
         user.setRole(Role.STUDENT);
         userRepository.save(user);
 
@@ -147,7 +147,7 @@ public class UserServiceImplementationTests {
         UUID id = UUID.randomUUID();
         User user = User.builder()
                 .id(id)
-                .username("Gabby Glorious")
+                .email("gg@test.com")
                 .role(Role.STUDENT)
                 .build();
 
@@ -155,7 +155,7 @@ public class UserServiceImplementationTests {
 
         assertThat(userDTO).isNotNull();
         assertThat(userDTO.getId()).isEqualTo(user.getId());
-        assertThat(userDTO.getUsername()).isEqualTo(user.getUsername());
+        assertThat(userDTO.getEmail()).isEqualTo(user.getEmail());
         assertThat(userDTO.getRole()).isEqualTo(user.getRole());
     }
 
@@ -166,7 +166,7 @@ public class UserServiceImplementationTests {
         UUID id = UUID.randomUUID();
         UserDTO userDTO = UserDTO.builder()
                 .id(id)
-                .username("Igor Ignatius")
+                .email("ii@test.com")
                 .role(Role.STUDENT)
                 .build();
 
@@ -174,7 +174,7 @@ public class UserServiceImplementationTests {
 
         assertThat(user).isNotNull();
         assertThat(user.getId()).isEqualTo(userDTO.getId());
-        assertThat(user.getUsername()).isEqualTo(userDTO.getUsername());
+        assertThat(user.getEmail()).isEqualTo(userDTO.getEmail());
         assertThat(user.getRole()).isEqualTo(userDTO.getRole());
     }
 

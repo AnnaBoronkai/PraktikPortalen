@@ -15,11 +15,11 @@
     <form th:action="@{/users/create}" th:object="${user}" method="post">
         <div class="form-container">
 
-            <label for="username"><strong>Namn:</strong></label>
-            <input type="text" id="username" name="username" th:field="*{username}" required/>
+            <label for="email"><strong>Namn:</strong></label>
+            <input type="text" id="email" name="email" th:field="*{email}" required/>
 
             <div class="validation-error">
-                <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span>
+                <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
             </div>
 
             <button type="submit" class="btn btn-primary">OK</button>

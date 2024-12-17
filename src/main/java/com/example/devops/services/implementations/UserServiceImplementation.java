@@ -5,7 +5,10 @@ import com.example.devops.enums.Role;
 import com.example.devops.services.interfaces.UserService;
 import com.example.devops.models.entities.User;
 import com.example.devops.repositories.UserRepository;
+import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 import org.springframework.stereotype.Service;
+
+import java.time.Instant;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -24,7 +27,7 @@ public class UserServiceImplementation implements UserService {
     public UserDTO userToDTO(User user){
         return UserDTO.builder()
                 .id(user.getId())
-                .username(user.getUsername())
+                .email(user.getEmail())
                 .role(user.getRole())
                 .build();
     }
@@ -33,7 +36,7 @@ public class UserServiceImplementation implements UserService {
     public User DTOToUser(UserDTO userDTO){
         return User.builder()
                 .id(userDTO.getId())
-                .username(userDTO.getUsername())
+                .email(userDTO.getEmail())
                 .role(userDTO.getRole())
                 .build();
     }
@@ -52,10 +55,10 @@ public class UserServiceImplementation implements UserService {
     }
 
     @Override
-    public void createAndSaveUser(String username) {
+    public void createAndSaveUser(String email) {
         User user = new User();
         user.setId(UUID.randomUUID());
-        user.setUsername(username);
+        user.setEmail(email);
         user.setRole(Role.STUDENT);
         userRepository.save(user);
     }
@@ -78,6 +81,21 @@ public class UserServiceImplementation implements UserService {
         userRepository.save(userToUpdate);
     }
 
-
+    //To-Do Add test for this one
+    @Override
+    public User loadUser(OidcUser oidcUser) {
+        String email = oidcUser.getEmail();
+        User user = userRepository.findFirstByEmail(email);
+        if (user != null) {
+            user.setLastLoginAt(Instant.now());
+            return userRepository.save(user);
+        } else {
+            User newUser = new User();
+            newUser.setId(UUID.randomUUID());
+            newUser.setEmail(email);
+            newUser.setRole(Role.STUDENT);
+            return userRepository.save(newUser);
+        }
+    }
 
 }

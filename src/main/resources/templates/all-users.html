@@ -21,7 +21,7 @@
         <div th:each="user : ${users}">
             <form class="student-form">
                 <div class="student-details">
-                    <span class="student-name" th:text="${user.username}"></span>
+                    <span class="student-name" th:text="${user.email}"></span>
                     <span class="student-role" th:text="${user.role}" style="float: right;"></span>
                 </div>
 
