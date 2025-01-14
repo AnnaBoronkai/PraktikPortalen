@@ -15,8 +15,8 @@ import java.util.UUID;
 public class UserDTO {
 
     private UUID id;
-    @NotNull(message = "Username cannot be null")
+    @NotNull(message = "Email cannot be null")
     @Size(min = 3, max = 20, message = "Username must be between 4 and 20 characters")
-    private String username;
+    private String email;
     private Role role;
 }

@@ -43,7 +43,7 @@ public class UserController {
         if (result.hasErrors()) {
             return "create-user";
         }
-        userService.createAndSaveUser(userDTO.getUsername());
+        userService.createAndSaveUser(userDTO.getEmail());
         return "redirect:/users";
     }
 

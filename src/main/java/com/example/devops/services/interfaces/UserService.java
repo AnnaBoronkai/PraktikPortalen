@@ -2,6 +2,8 @@ package com.example.devops.services.interfaces;
 
 import com.example.devops.models.dtos.UserDTO;
 import com.example.devops.models.entities.User;
+import org.springframework.security.oauth2.core.oidc.user.OidcUser;
+
 import java.util.List;
 import java.util.UUID;
 
@@ -21,5 +23,6 @@ public interface UserService {
 
     void setUserRole(UUID id);
 
+    User loadUser(OidcUser oidcUser);
 
 }
