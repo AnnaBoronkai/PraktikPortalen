@@ -9,6 +9,7 @@ on:
 
 jobs:
   build:
+    if: ${{ env.CI_ENABLED != 'false' }}
     runs-on: ubuntu-latest
 
     steps:
